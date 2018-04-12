@@ -1,0 +1,53 @@
+---
+title: "Ukázka Markdown"
+author: "Jan Caha"
+date: "12 dubna 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Balíky
+
+Načtení potřebných balíků.
+
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+
+## Data
+
+Načtení a prohlídka dat. Zjsitíme jaké hodnoty jsou pro barvy a řez kamenů.
+
+```{r}
+data(diamonds)
+
+unique(diamonds$cut)
+
+unique(diamonds$color)
+```
+Vybereme pouze kameny s ideálním řezem a barvami I a J.
+
+```{r}
+diamonds <- diamonds %>% 
+  filter(color %in% c("I", "J"), cut == "Ideal")
+```
+``
+### Základní statistiky výběru
+
+Počet prvku: `r nrow(diamonds)`
+Nevyšší cena: `r max(diamonds$price)`
+
+## Vytvoření grafu
+
+Vykreslíme si závislost ceny na počtu karátů.
+
+```{r}
+ggplot(diamonds, aes(price, carat)) + 
+  geom_point()
+```
+
+Analýza pokračuje dále ...
